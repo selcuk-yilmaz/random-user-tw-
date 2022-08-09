@@ -8,11 +8,12 @@ import mapSvg from "./assets/map.svg";
 import phoneSvg from "./assets/phone.svg";
 import padlockSvg from "./assets/padlock.svg";
 import cwSvg from "./assets/cw.svg";
+import spinner from "./assets/spinner.gif";
 import Footer from "./components/footer/Footer";
 import axios from "axios";
 
 function App() {
-  const [control, setControl] = useState([])
+  const [control, setControl] = useState([]);
   const [add, setAdd] = useState([]);
   const [title, setTitle] = useState();
   const [value, setValue] = useState();
@@ -33,7 +34,7 @@ function App() {
   };
   useEffect(() => {
     getUser();
-  },[]);
+  }, []);
 
   const handleName = () => {
     setTitle("My name is");
@@ -84,18 +85,19 @@ function App() {
       phone: source[0].phone,
       age: source[0].dob.age,
     };
-    if (!control.includes(source[0].email)){
-setAdd([...add, newObj]);
-setControl([...add, source[0].email]);
-    } 
+    if (!control.includes(source[0].email)) {
+      setAdd([...add, newObj]);
+      setControl([...add, source[0].email]);
+    }
   };
-
 
   console.log(add);
   return (
     <>
       {loading ? (
-        <h1 style={{textAlign:"center",marginTop:"10rem"}} >Loading...</h1>
+        <h1 style={{ textAlign: "center", marginTop: "10rem" }}>
+          <img src={spinner} alt="" />
+        </h1>
       ) : (
         <main>
           <div className="block bcg-orange">
@@ -133,7 +135,9 @@ setControl([...add, source[0].email]);
                 </button>
                 <button onClick={handleAge} className="icon" data-label="age">
                   <img
-                    src={source[0].gender === "female" ? womanAgeSvg : manAgeSvg}
+                    src={
+                      source[0].gender === "female" ? womanAgeSvg : manAgeSvg
+                    }
                     alt="age"
                     id="iconImg"
                   />
